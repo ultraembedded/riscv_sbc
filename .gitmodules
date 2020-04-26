@@ -1,3 +1,6 @@
 [submodule "src/riscv"]
 	path = src/riscv
 	url = https://github.com/ultraembedded/riscv
+[submodule "src/usb_serial"]
+	path = src/usb_serial
+	url = https://github.com/ultraembedded/core_usb_uart.git
