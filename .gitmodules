@@ -4,3 +4,9 @@
 [submodule "src/usb_serial"]
 	path = src/usb_serial
 	url = https://github.com/ultraembedded/core_usb_uart.git
+[submodule "src/ulpi_wrapper"]
+	path = src/ulpi_wrapper
+	url = https://github.com/ultraembedded/core_ulpi_wrapper.git
+[submodule "src/usb_host"]
+	path = src/usb_host
+	url = https://github.com/ultraembedded/core_usb_host.git
