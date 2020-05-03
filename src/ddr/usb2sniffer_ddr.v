@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------
-//                     USB2Sniffer Linux SBC
+//                 USB2Sniffer Linux SBC Project
 //                            V0.1
 //                     Ultra-Embedded.com
 //                       Copyright 2020
@@ -9,7 +9,7 @@
 //                       License: BSD
 //-----------------------------------------------------------------
 //
-// Copyright (c) 2014-2019, Ultra-Embedded.com
+// Copyright (c) 2020, Ultra-Embedded.com
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
@@ -38,6 +38,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 // SUCH DAMAGE.
 //-----------------------------------------------------------------
+
 module usb2sniffer_ddr
 (
     // Inputs
