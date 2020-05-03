@@ -13,3 +13,6 @@
 [submodule "src/core_soc"]
 	path = src/core_soc
 	url = https://github.com/ultraembedded/core_soc.git
+[submodule "src/dbg_bridge"]
+	path = src/dbg_bridge
+	url = https://github.com/ultraembedded/core_dbg_bridge.git
