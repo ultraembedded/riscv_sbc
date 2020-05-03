@@ -48,6 +48,8 @@ module fpga_top
     ,parameter BAUDRATE         = 1000000
     ,parameter UART_SPEED       = 1000000
     ,parameter C_SCK_RATIO      = 8
+    ,parameter MEM_CACHE_ADDR_MIN = 32'h80000000
+    ,parameter MEM_CACHE_ADDR_MAX = 32'h8fffffff
 )
 //-----------------------------------------------------------------
 // Ports
@@ -891,6 +893,10 @@ u_axi_dist
 
 
 riscv_top
+#(
+     .MEM_CACHE_ADDR_MIN(MEM_CACHE_ADDR_MIN)
+    ,.MEM_CACHE_ADDR_MAX(MEM_CACHE_ADDR_MAX)
+)
 u_cpu
 (
     // Inputs

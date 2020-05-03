@@ -41,3 +41,5 @@ git clone --recursive https://github.com/ultraembedded/projects_usb2sniffer.git
 * DDR3, SPI-Flash, ULPI2 interfaces working.
 * RISC-V CPU booting Linux RV32 5.0 kernel to BusyBox userspace.
 * USB Serial port implemented in the FPGA fabric for Linux console access (connected via USB micro port).
+* USB Host port working under Linux (mounting USB storage devices).
+* Initial source released.
