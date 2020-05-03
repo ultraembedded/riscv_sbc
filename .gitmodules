@@ -16,3 +16,6 @@
 [submodule "src/dbg_bridge"]
 	path = src/dbg_bridge
 	url = https://github.com/ultraembedded/core_dbg_bridge.git
+[submodule "src/spiflash"]
+	path = src/spiflash
+	url = https://github.com/ultraembedded/core_spiflash.git
