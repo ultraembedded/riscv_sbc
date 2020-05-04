@@ -59,3 +59,6 @@ The remainder (DDR3, CDC, PLL) are IP cores built with Xilinx Vivado.
 * USB Serial port implemented in the FPGA fabric for Linux console access (connected via USB micro port).
 * USB Host port working under Linux (mounting USB storage devices).
 * Initial source released.
+
+
+[![asciicast](https://asciinema.org/a/IDLP5h9RHXHBV9Y0r2BwNqaiF.svg)](https://asciinema.org/a/IDLP5h9RHXHBV9Y0r2BwNqaiF)
