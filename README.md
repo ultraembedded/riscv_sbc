@@ -21,6 +21,8 @@ The USB2Sniffer is designed to be a USB 2.0 capture device, or a development boa
 * 2 x High Speed USB2.0 ULPI PHY [Microchip USB3300](http://ww1.microchip.com/downloads/en/DeviceDoc/00001783C.pdf)
 * 3 RGB LEDs, 2 x GPIO pins
 
+![Annotated](docs/usb2sniffer_annotated.png)
+
 ## Getting Started
 
 #### Cloning
