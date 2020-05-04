@@ -1,6 +1,6 @@
 # RISC-V SBC based around the LambaConcept USB2Sniffer FPGA board
 
-Github: [https://github.com/ultraembedded/projects_usb2sniffer](https://github.com/ultraembedded/projects_usb2sniffer)
+Github: [https://github.com/ultraembedded/riscv_sbc](https://github.com/ultraembedded/riscv_sbc)
 
 ## Intro
 This repo contains various projects for the LambaConcept USB2Sniffer FPGA board.
@@ -28,7 +28,7 @@ The USB2Sniffer is designed to be a USB 2.0 capture device, or a development boa
 To clone this project and its dependencies;
 
 ```
-git clone --recursive https://github.com/ultraembedded/projects_usb2sniffer.git
+git clone --recursive https://github.com/ultraembedded/riscv_sbc.git
 
 ```
 
