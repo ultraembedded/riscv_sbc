@@ -42,7 +42,7 @@ The remainder (DDR3, CDC, PLL) are IP cores built with Xilinx Vivado.
 
 | Name                   | Description                                                 | Provider |
 | ---------------------- | ------------------------------------------------------------| -------- |
-| riscv_top              | [32-bit RISC-V CPU](https://github.com/ultraembedded/riscv) | - |
+| riscv_top              | [32-bit RISC-V CPU](https://github.com/ultraembedded/riscv) or [Dual Issue RV32](https://github.com/ultraembedded/biriscv) | - |
 | usb_host               | [Basic USB Host](https://github.com/ultraembedded/core_usb_host) | - |
 | ulpi_wrapper           | [ULPI PHY Interface](https://github.com/ultraembedded/core_ulpi_wrapper) | - |
 | core_soc               | [Peripherals - UART, SPI, GPIO](https://github.com/ultraembedded/core_soc) | - |
