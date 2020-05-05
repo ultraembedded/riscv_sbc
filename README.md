@@ -12,7 +12,7 @@ This repo contains a working RISC-V based Single Board Computer project based ar
 The USB2Sniffer is designed to be used as a USB 2.0 capture device, or as a development board for USB 2.0 IP designs.  
 It has plenty of fast DDR3 RAM and SPI-Flash, as well as USB 2.0 (Host + Device) and USB 3.0 (high speed FIFO) interfaces.
 
-**It can be used repurposed as a single board computer (SBC) for running RISC-V Linux with both USB 2.0 host and USB 2.0 device support!**
+**It can be repurposed as a single board computer (SBC) for running RISC-V Linux with both USB 2.0 host and USB 2.0 device support!**
 
 ## HW Features
 * XC7A35T Artix 7 Series FPGA [xc7a35t-fgg484-1](docs/xc7a35tfgg484.txt)
@@ -54,11 +54,13 @@ The remainder (DDR3, CDC, PLL) are IP cores built with Xilinx Vivado.
 | axilite_cdc_buffer.xci | [AXI4-Lite Clock Domain Converter](https://github.com/ultraembedded/riscv_sbc/blob/master/src/cdc/axilite_cdc_buffer.xci) | Xilinx |
 
 ## Current Status
-* DDR3, SPI-Flash, ULPI interfaces working.
+* DDR3, SPI-Flash, ULPI interfaces now working.
 * RISC-V CPU booting Linux RV32 5.0 kernel to BusyBox userspace.
-* USB Serial port implemented in the FPGA fabric for Linux console access (connected via USB micro port).
+* Option of USB Serial port implemented in the FPGA fabric for Linux console access (connected via USB micro port).
+* Option of Linux console / debug output via UART connector (@ 1M baud).
 * USB Host port working under Linux (mounting USB storage devices).
-* Initial source released.
-
+* Initial Verilog source released.
+* Prebuilt bitstream added to 'bitstreams' folder.
+* More instructions to come...
 
 [![asciicast](https://asciinema.org/a/IDLP5h9RHXHBV9Y0r2BwNqaiF.svg)](https://asciinema.org/a/IDLP5h9RHXHBV9Y0r2BwNqaiF)
