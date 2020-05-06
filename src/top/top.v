@@ -283,7 +283,7 @@ assign ulpi_sw_oe_n = 1'b0;
 assign ulpi_sw_s    = 1'b1;
 
 `ifdef INCLUDE_USB_DEVICE
-usb_serial
+usb_serial_top
 u_usb
 (
     // ULPI
