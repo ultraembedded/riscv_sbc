@@ -126,6 +126,7 @@ wire  [  1:0]  axi_i_rresp_w;
 wire  [ 31:0]  axi_d_wdata_w;
 wire           axi_dist_inport_wvalid_w;
 wire  [  3:0]  axi_d_awid_w;
+wire           usb_irq_w;
 wire           axi_dist_outport0_wvalid_w;
 wire  [  3:0]  axi_dist_outport0_wstrb_w;
 wire           axi_dist_outport0_bready_w;
@@ -426,7 +427,7 @@ u_usb
     ,.cfg_rvalid_o(usb_cfg_out_rvalid_w)
     ,.cfg_rdata_o(usb_cfg_out_rdata_w)
     ,.cfg_rresp_o(usb_cfg_out_rresp_w)
-    ,.intr_o()
+    ,.intr_o(usb_irq_w)
     ,.ulpi_data_in_o(ulpi_data_in_o)
     ,.ulpi_stp_o(ulpi_stp_o)
 );
@@ -463,7 +464,7 @@ u_soc
     ,.ext1_cfg_rvalid_i(usb_cfg_in_rvalid_w)
     ,.ext1_cfg_rdata_i(usb_cfg_in_rdata_w)
     ,.ext1_cfg_rresp_i(usb_cfg_in_rresp_w)
-    ,.ext1_irq_i(1'b0)
+    ,.ext1_irq_i(usb_irq_w)
     ,.ext2_cfg_awready_i(1'b0)
     ,.ext2_cfg_wready_i(1'b0)
     ,.ext2_cfg_bvalid_i(1'b0)
@@ -551,7 +552,7 @@ u_dbg
     ,.mem_rresp_i(axi_t_rresp_w)
     ,.mem_rid_i(axi_t_rid_w)
     ,.mem_rlast_i(axi_t_rlast_w)
-    ,.gpio_inputs_i(32'b0)
+    ,.gpio_inputs_i(enable_w)
 
     // Outputs
     ,.uart_txd_o(dbg_rxd_o)
@@ -977,7 +978,7 @@ reg [31:0] reset_vector_q;
 
 always @ (posedge clk_i or posedge rst_i)
 if (rst_i)
-    reset_vector_q <= 32'h80000000;
+    reset_vector_q <= 32'h88300000;
 else if (enable_w[`DBG_BIT_CAPTURE_HI] && enable_w[`DBG_BIT_BOOTADDR])
     reset_vector_q <= {enable_w[31:16], reset_vector_q[15:0]};
 else if (enable_w[`DBG_BIT_CAPTURE_LO] && enable_w[`DBG_BIT_BOOTADDR])
@@ -985,14 +986,25 @@ else if (enable_w[`DBG_BIT_CAPTURE_LO] && enable_w[`DBG_BIT_BOOTADDR])
 
 assign reset_vector_w  = reset_vector_q;
 
-reg reset_initial_q;
+reg  reset_q;
+wire dbg_rst_w         = ~enable_w[`DBG_BIT_RELEASE_RESET];
+
+reg  ignore_dbg_rst_q;
+always @ (posedge clk_i or posedge rst_i)
+if (rst_i)
+    ignore_dbg_rst_q <= 1'b1;
+else if (~dbg_rst_w)
+    ignore_dbg_rst_q <= 1'b0;
+
+wire ignore_dbg_rst_w = ignore_dbg_rst_q;
 
 always @ (posedge clk_i or posedge rst_i)
 if (rst_i)
-    reset_initial_q <= 1'b1;
+    reset_q <= 1'b1;
 else
-    reset_initial_q <= 1'b0;
+    reset_q <= (dbg_rst_w & ~ignore_dbg_rst_w);
 
-assign rst_cpu_w       = reset_initial_q | ~enable_w[0];
+assign rst_cpu_w = reset_q;
+
 
 endmodule
