@@ -64,3 +64,31 @@ The remainder (DDR3, CDC, PLL) are IP cores built with Xilinx Vivado.
 * More instructions to come...
 
 [![asciicast](https://asciinema.org/a/IDLP5h9RHXHBV9Y0r2BwNqaiF.svg)](https://asciinema.org/a/IDLP5h9RHXHBV9Y0r2BwNqaiF)
+
+## Prebuilt Images
+A prebuilt FPGA bitstream and series of bootloaders are provided in the [bitstreams](https://github.com/ultraembedded/riscv_sbc/tree/master/bitstreams) directory.
+
+These can be flashed onto the board with a Vivado supported programmer using the provided makefile / Vivado TCL;
+```
+# Make sure vivado tools are available in the shell path....
+
+# Create a MCS file containing the bitstream and various bootloaders
+# This creates riscv_sbc.mcs
+cd bitstreams
+make create_mcs
+
+# Program riscv_sbc.mcs onto the onboard SPI-Flash
+make program_flash
+```
+
+The SPI-Flash device is expected to contain the following files;
+
+| Offset     | File                | Description                                                                      |
+| ---------- | --------------------| -------------------------------------------------------------------------------- |
+| 0x00000000 | fpga.bit            | FPGA bitstream.                                                                  |
+| 0x00300000 | primary_boot.bin    | Bootloader copies Flash 0x00400000 - 0x0040FFFF to 0x80000000 and jumps to it.   |
+| 0x00400000 | secondary_boot.bin  | Bootloader for Linux via USB MSD. Linked to run from 0x80000000.                 |
+
+Together this prebuilt package will search for a Linux kernel to boot from a USB MSD device plugged into the USB host port.  
+The USB drive needs to be FAT formatted and contain the kernel (/vmlinux.bin) and device tree binary (/config.dtb) in the root directory.  
+The kernel is expected to be linked to run from 0x80400000 (standard for RISC-V 32-bit Linux Kernel).
