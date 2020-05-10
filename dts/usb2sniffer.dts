@@ -1,0 +1,86 @@
+// SPDX-License-Identifier: GPL-2.0
+/dts-v1/;
+
+/ {
+  #address-cells = <1>;
+  #size-cells = <1>;
+  interrupt-parent = <&irq_ctrl>;
+
+    chosen {
+        bootargs = "console=hvc0,1000000 earlycon=sbi debug";
+        linux,stdout-path = "uart0:1000000";
+    };    
+
+  cpus {
+    #address-cells = <1>;
+    #size-cells = <0>;
+    timebase-frequency = <50000000>;
+    CPU0: cpu@0 {
+      device_type = "cpu";
+      reg = <0>;
+      status = "okay";
+      compatible = "riscv";
+      riscv,isa = "rv32ima";
+      mmu-type = "riscv,sv32";
+      clock-frequency = <50000000>;
+    };
+  };
+
+  memory@80000000 {
+      device_type = "memory";
+      reg = <0x80000000 0x2000000>;
+  };
+
+  osc: oscillator {
+      compatible = "fixed-clock";
+      #clock-cells = <0>;
+      clock-frequency  = <50000000>;
+      clock-output-names = "osc";
+  };
+
+  soc {
+    #address-cells = <1>;
+    #size-cells = <1>;
+    compatible = "simple-bus";
+    ranges;
+
+    irq_ctrl: interrupt-controller@90000000 {
+      #interrupt-cells = <0x1>;
+      compatible = "xlnx,xps-intc-1.00.a";
+      interrupt-controller ;
+      reg = < 0x90000000 0x10000 >;
+      xlnx,kind-of-intr = <0x100>;
+      xlnx,num-intr-inputs = <0x9>;
+    } ;  
+
+    gpio: gpio-controller@94000000 {
+      compatible = "brcm,bcm6345-gpio";
+      reg-names = "dirout", "dat";
+      reg = <0x94000000 1>, <0x94000008 1>;
+
+      #gpio-cells = <2>;
+      gpio-controller;
+    };
+
+    usbhost: ue11-hcd@95000000 {
+        compatible = "ue11-hcd";
+        interrupt-parent = <&irq_ctrl>;
+        interrupts = <4>;
+        reg = < 0x95000000 0x1000 >;
+        #address-cells = <1>;
+        #size-cells = <0>;
+    } ;
+  };
+
+  leds {
+     compatible = "gpio-leds";
+
+     led0: heartbeat {
+         label = "heartbeat";
+         gpios = <&gpio 0 0>;
+         default-state = "off";
+         linux,default-trigger = "heartbeat";
+     };
+  };
+
+};
