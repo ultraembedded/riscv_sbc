@@ -87,8 +87,7 @@ The SPI-Flash device is expected to contain the following files;
 | ---------- | --------------------| -------------------------------------------------------------------------------- |
 | 0x00000000 | fpga.bit            | FPGA bitstream.                                                                  |
 | 0x00300000 | primary_boot.bin    | Bootloader copies Flash 0x00400000 - 0x0040FFFF to 0x80000000 and jumps to it.   |
-| 0x00400000 | secondary_boot.bin  | Bootloader for Linux via USB MSD. Linked to run from 0x80000000.                 |
+| 0x00400000 | secondary_boot.bin  | Bootloader for Linux. Copies Kernel from FLASH to RAM.                           |
+| 0x00500000 | config.dtb          | Linux Device Tree Blob (output from dtc).                                        |
+| 0x00600000 | vmlinux.bin         | Linux Kernel binary.                                                             |
 
-Together this prebuilt package will search for a Linux kernel to boot from a USB MSD device plugged into the USB host port.  
-The USB drive needs to be FAT formatted and contain the kernel (/vmlinux.bin) and device tree binary (/config.dtb) in the root directory.  
-The kernel is expected to be linked to run from 0x80400000 (standard for RISC-V 32-bit Linux Kernel).
